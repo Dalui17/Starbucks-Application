@@ -50,46 +50,37 @@ The goal is to automate the complete software delivery lifecycle from source cod
 
 
 ```text
-┌──────────────────┐
-│   Developer      │
-└────────┬─────────┘
-         │ Git Push
-         ▼
-┌──────────────────┐
-│     GitHub       │
-│ Source Repository│
-└────────┬─────────┘
-         │
-         ▼
-┌──────────────────┐
-│    Jenkins CI    │
-├──────────────────┤
-│ Git Checkout     │
-│ Install Packages │
-│ Build Docker Img │
-│ Push to DockerHub│
-└────────┬─────────┘
-         │
-         ▼
-┌──────────────────┐
-│    Docker Hub    │
-│ Image Repository │
-└────────┬─────────┘
-         │
-         ▼
-┌──────────────────┐
-│    Jenkins CD    │
-├──────────────────┤
-│ Pull Latest Img  │
-│ Stop Container   │
-│ Deploy Container │
-└────────┬─────────┘
-         │
-         ▼
-┌──────────────────┐
-│    AWS EC2       │
-│ Running App      │
-└──────────────────┘
+## Enterprise Architecture Flow
+
+```text
+Developer
+    │
+    ▼
+GitHub Repository
+    │
+    ▼
+Jenkins CI Pipeline
+    │
+    ├── Checkout Source Code
+    ├── Install Dependencies
+    ├── Build Application
+    ├── Build Docker Image
+    └── Push Docker Image
+    │
+    ▼
+Docker Hub Registry
+    │
+    ▼
+Jenkins CD Pipeline
+    │
+ ┌──┴────────────┐
+ ▼               ▼
+STAGING        PROD
+Deployment   Deployment
+    │             │
+    └──────┬──────┘
+           ▼
+      AWS EC2
 ```
 
 ## Flow
@@ -310,6 +301,122 @@ Restart Jenkins after installation.
 
 ---
 
+# 11.1 Configure Docker Hub Credentials
+
+Navigate:
+
+Manage Jenkins
+→ Credentials
+→ System
+→ Global Credentials
+→ Add Credentials
+
+Configure:
+
+```text
+Kind        : Username with Password
+Username    : DockerHub Username
+Password    : DockerHub Password / Access Token
+ID          : docker
+Description : docker
+```
+
+This credential will be used by Jenkins pipelines to authenticate with Docker Hub and push images securely.
+
+---
+
+# 11.2 Jenkins Global Tool Configuration
+
+Navigate:
+
+Manage Jenkins
+→ Tools
+
+Configure the following tools.
+
+## JDK Configuration
+
+```text
+Name : jdk17
+```
+
+Enable:
+
+```text
+Install Automatically
+```
+
+Installer:
+
+```text
+Install from adoptium.net
+```
+
+Version:
+
+```text
+jdk-17.0.8.1+1
+```
+
+---
+
+## NodeJS Configuration
+
+```text
+Name : node16
+```
+
+Enable:
+
+```text
+Install Automatically
+```
+
+Version:
+
+```text
+NodeJS 16.20.0
+```
+
+Used during:
+
+```bash
+npm install
+npm run build
+```
+
+---
+
+## Docker Configuration
+
+```text
+Name : docker
+```
+
+Enable:
+
+```text
+Install Automatically
+```
+
+Version:
+
+```text
+latest
+```
+
+Used during:
+
+```bash
+docker build
+docker tag
+docker push
+docker pull
+docker run
+```
+
+---
+
 # 12. Configure NodeJS
 
 Navigate:
@@ -453,6 +560,45 @@ Save.
 
 ---
 
+# 17.1 Configure Parameterized CD Pipeline
+
+Enable:
+
+```text
+This project is parameterized
+```
+
+Add the following Boolean Parameters.
+
+### STAGING
+
+```text
+Name        : STAGING
+Description : staging ip
+```
+
+### PROD
+
+```text
+Name        : PROD
+Description : prod ip
+```
+
+Purpose:
+
+These parameters allow deployment to multiple environments using the same CD pipeline.
+
+Environment Options:
+
+```text
+STAGING
+PROD
+```
+
+This is commonly used in enterprise CI/CD implementations where deployment targets differ between testing and production environments.
+
+---
+
 # 18. CD Pipeline Explanation
 
 Pipeline Stages
@@ -481,6 +627,86 @@ Benefits
 - Zero Manual Steps
 - Faster Releases
 - Reduced Errors
+
+---
+
+# 18.1 Configure Downstream Trigger
+
+Navigate:
+
+CD Pipeline
+→ Configure
+→ Triggers
+
+Enable:
+
+```text
+Build after other projects are built
+```
+
+Projects to watch:
+
+```text
+CI pipeline
+```
+
+Select:
+
+```text
+Trigger only if build is stable
+```
+
+Purpose:
+
+Automatically start the CD Pipeline after successful completion of the CI Pipeline.
+
+This removes manual intervention and creates a fully automated deployment workflow.
+
+---
+
+# 18.2 CI → CD Relationship
+
+Workflow:
+
+```text
+GitHub Push
+        │
+        ▼
+CI Pipeline
+        │
+        ▼
+Checkout Source Code
+        │
+        ▼
+Install Dependencies
+        │
+        ▼
+Build Docker Image
+        │
+        ▼
+Push Docker Image
+        │
+        ▼
+Docker Hub
+        │
+        ▼
+Trigger CD Pipeline
+        │
+   ┌────┴────┐
+   ▼         ▼
+STAGING    PROD
+        │
+        ▼
+Application Deployment
+```
+
+Benefits:
+
+- Complete Automation
+- Faster Releases
+- Reduced Human Error
+- Consistent Deployments
+- Enterprise Deployment Workflow
 
 ---
 
