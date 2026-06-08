@@ -848,6 +848,42 @@ Jenkins triggers CI, builds image, pushes image, triggers deployment.
 
 ---
 
+# Advanced Deployment Scenarios
+
+## Scenario 1: Docker Hub Repository is Private
+
+If the Docker Hub repository is private, Jenkins must authenticate before pulling images.
+
+Steps:
+
+1. Store Docker Hub credentials in Jenkins.
+2. Perform Docker login.
+3. Pull image from private repository.
+4. Deploy container.
+
+---
+
+## Scenario 2: Deploying to Remote Server
+
+Instead of deploying on the Jenkins server itself, Jenkins can connect to a remote EC2 instance using SSH.
+
+Flow:
+
+Jenkins → SSH → Remote EC2 → Docker Pull → Docker Run
+
+Benefits:
+
+- Better separation of concerns
+- More secure architecture
+- Production-ready deployment model
+
+---
+
+## Scenario 3: Private Repository + Remote Deployment
+
+Jenkins authenticates with Docker Hub and deploys containers on a remote EC2 server through SSH.
+---
+
 # 23. Learning Outcomes
 
 After completing this project you will understand:
