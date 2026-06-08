@@ -15,11 +15,6 @@
 
 ---
 
-![GitHub last commit](https://img.shields.io/github/last-commit/Dalui17/jenkins-cicd-docker-aws?style=flat-square)
-![GitHub repo size](https://img.shields.io/github/repo-size/Dalui17/jenkins-cicd-docker-aws?style=flat-square)
-![GitHub stars](https://img.shields.io/github/stars/Dalui17/jenkins-cicd-docker-aws?style=flat-square)
-
-
 <p align="center">
   <img src="screenshots/banner.png" alt="CI/CD Pipeline Banner" width="100%">
 </p>
