@@ -33,7 +33,7 @@ The application source code is stored in GitHub, Jenkins automates the build pro
 
 A complete beginner-friendly step-by-step implementation guide is available here:
 
-👉 [Complete Setup Guide](docs/complete-setup-guide-final.md)
+👉 [Complete Setup Guide](docs/complete-setup-guide.md)
 
 ---
 
