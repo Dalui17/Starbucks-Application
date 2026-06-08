@@ -29,6 +29,14 @@ The application source code is stored in GitHub, Jenkins automates the build pro
 
 ---
 
+## 📚 Documentation
+
+A complete beginner-friendly step-by-step implementation guide is available here:
+
+👉 [Complete Setup Guide](docs/complete-setup-guide-final.md)
+
+---
+
 # 🏗️ Solution Architecture
 
 <p align="center">
