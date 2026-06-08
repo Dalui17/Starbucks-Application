@@ -1,5 +1,24 @@
-
 # 🚀 Enterprise CI/CD Pipeline using Jenkins, Docker & AWS EC2
+
+<p align="center">
+
+<img src="https://img.shields.io/badge/AWS-EC2-orange?style=for-the-badge&logo=amazonaws"/>
+<img src="https://img.shields.io/badge/Jenkins-CI/CD-red?style=for-the-badge&logo=jenkins"/>
+<img src="https://img.shields.io/badge/Docker-Containerization-blue?style=for-the-badge&logo=docker"/>
+<img src="https://img.shields.io/badge/GitHub-Source_Control-black?style=for-the-badge&logo=github"/>
+<img src="https://img.shields.io/badge/DockerHub-Registry-2496ED?style=for-the-badge&logo=docker"/>
+<img src="https://img.shields.io/badge/Linux-Ubuntu-E95420?style=for-the-badge&logo=ubuntu"/>
+<img src="https://img.shields.io/badge/CI/CD-Automation-success?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/DevOps-Hands_On_Project-blueviolet?style=for-the-badge"/>
+
+</p>
+
+---
+
+![GitHub last commit](https://img.shields.io/github/last-commit/Dalui17/jenkins-cicd-docker-aws?style=flat-square)
+![GitHub repo size](https://img.shields.io/github/repo-size/Dalui17/jenkins-cicd-docker-aws?style=flat-square)
+![GitHub stars](https://img.shields.io/github/stars/Dalui17/jenkins-cicd-docker-aws?style=flat-square)
+
 
 <p align="center">
   <img src="screenshots/banner.png" alt="CI/CD Pipeline Banner" width="100%">
