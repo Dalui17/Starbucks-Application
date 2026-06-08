@@ -1,0 +1,70 @@
+20 Scenario-Based Interview Questions and Answers
+Troubleshooting Scenarios
+
+Q1: Your Jenkins pipeline fails during the Docker build step. How would you troubleshoot?
+Check Jenkins console logs, verify Dockerfile syntax, ensure Docker service is running on Jenkins server, and confirm Docker plugins are installed.
+
+Q2: The application works on port 3000 locally but not accessible after deployment. What could be wrong?
+Check security group rules to ensure port 3000 is open, verify the application is running (docker ps), and confirm the correct IP address is being used.
+
+Q3: Docker login fails in Jenkins pipeline. How do you resolve this?
+Verify credentials are correctly stored in Jenkins Credentials Manager, check Docker Hub is accessible, and ensure the credential ID matches in the pipeline script.
+
+Q4: Your CD pipeline deploys successfully but shows the old version. What's the issue?
+The old Docker container might still be running. Stop and remove the old container before deploying, or use docker pull to get the latest image from Docker Hub.
+
+Q5: Jenkins job fails with "npm: command not found". How do you fix it?
+Install Node.js and NPM on the Jenkins server, or use a Docker agent with Node.js pre-installed.
+
+Real-World Scenarios
+
+Q6: Your manager asks you to deploy to production but skip the CR process. What do you do?
+Explain that skipping CR violates ITIL compliance and could cause audit issues. Request proper approval through CAB before proceeding.
+
+Q7: You need to deploy the same application to DEV, QA, and PROD. How would you design this?
+Use parameterized builds with environment variables, separate Docker tags for each environment, and different credentials/servers for each stage.
+
+Q8: Production deployment is scheduled during business hours. How do you minimize risk?
+Request a maintenance window, implement blue-green deployment, keep rollback plan ready, and monitor logs closely during deployment.
+
+Q9: Your Docker Hub account reaches the pull limit. What alternatives do you have?
+Set up a private Docker registry (AWS ECR, Azure ACR), use Docker Hub paid plan, or implement image caching on Jenkins server.
+
+Q10: A security audit flags hardcoded credentials in your pipeline. How do you remediate?
+Move all credentials to Jenkins Credentials Manager, use environment variables, and update pipeline to reference credential IDs instead of hardcoded values.
+
+Design & Architecture Scenarios
+
+Q11: How would you implement automatic rollback if deployment fails?
+Add health check after deployment, store previous Docker image tag, and create a rollback stage that redeploys the previous version if health check fails.
+
+Q12: Your team wants to deploy multiple microservices. How would you structure the pipeline?
+Create separate pipelines for each microservice, use Docker Compose for orchestration, or implement a multi-branch pipeline with service-specific stages.
+
+Q13: How would you handle database migrations in your CICD pipeline?
+Add a separate stage before deployment to run migration scripts, use version control for migrations, and implement rollback scripts for failures.
+
+Q14: Your application needs different configurations for each environment. How do you manage this?
+Use environment-specific config files, implement parameter substitution in pipeline, or use tools like ConfigMaps in Kubernetes.
+
+Q15: How would you implement approval gates between environments?
+Use Jenkins input step for manual approval, integrate with CAB ticketing system, or implement role-based approval workflows.
+
+Performance & Optimization Scenarios
+
+Q16: Your pipeline takes 30 minutes to complete. How would you optimize it?
+Cache NPM dependencies, use parallel stages, optimize Docker layer caching, and pre-install tools on Jenkins server.
+
+Q17: Multiple teams are using the same Jenkins server and it's slow. What's your solution?
+Implement Jenkins agents/slaves, use Docker-based dynamic agents, or separate Jenkins instances per team.
+
+Q18: Docker images are becoming very large (2GB+). How do you reduce size?
+Use multi-stage builds, choose minimal base images (alpine), remove unnecessary dependencies, and clean up build artifacts.
+
+Security Scenarios
+
+Q19: Your EC2 instance is exposed to the internet. How do you secure it?
+Restrict security group to specific IPs, use VPN/bastion host, implement SSH key-based authentication, and disable password login.
+
+Q20: A developer accidentally pushed AWS credentials to GitHub. What immediate actions do you take?
+Immediately rotate the credentials in AWS, remove credentials from Git history, implement pre-commit hooks to prevent future incidents, and use AWS Secrets Manager for credential storage.
