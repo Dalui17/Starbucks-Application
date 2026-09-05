@@ -77,6 +77,7 @@ A complete beginner-friendly step-by-step implementation guide is available here
 
 ---
 
+
 # 🔄 End-to-End Workflow
 
 ```text
@@ -132,6 +133,7 @@ Docker image is generated using Dockerfile.
 Docker image is pushed to Docker Hub Registry.
 
 ---
+
 
 # 🚀 CD Pipeline Stages
 
@@ -270,6 +272,7 @@ jenkins-cicd-docker-aws/
 
 ---
 
+
 # 👨‍💻 Author
 
 ### Anirban Dalui
@@ -277,5 +280,6 @@ jenkins-cicd-docker-aws/
 DevOps Engineer | AWS | Docker | Jenkins | Kubernetes | Terraform | Ansible
 
 ---
+
 
 ⭐ If you found this project useful, feel free to Star the repository.
